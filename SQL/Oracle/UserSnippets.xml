@@ -1,0 +1,79 @@
+<snippets>
+<group category="Custom" language="PLSQL">
+<snippet name="Generate UUID" description="Generate UUID">
+<code>
+<![CDATA[
+SELECT LOWER(SUBSTR(sys_guid(), 0, 8) || '-' || SUBSTR(sys_guid(), 9, 4) || '-' || SUBSTR(sys_guid(), 13, 5) || '-' || SUBSTR(sys_guid(), 18, 12)) AS Fecal_GUID
+ FROM DUAL
+ CONNECT BY Level <= :desired_number_of_records;
+]]>
+</code>
+</snippet>
+<snippet name="Standard Diff" description="	Compares two data sets via minus in both directions. Shows orphans and differences.">
+<code>
+<![CDATA[
+WITH one AS
+ (SELECT col1
+ , col2
+ , col3
+ , col4
+ /* all columns relevant for comparison */
+ FROM table_a
+ /* add where conditions as needed */
+ )
+ , two AS
+ (SELECT col1
+ , col2
+ , col3
+ , col4
+ /* all columns relevant for comparison */
+ FROM table_b
+ /* add where conditions as needed */
+ )
+ , diff AS
+ ( (SELECT 'one' source_table , e.* FROM one e
+ MINUS
+ SELECT 'one' source_table, z.* FROM two z)
+ UNION ALL
+ (SELECT 'two' source_table , z.* FROM two z
+ MINUS
+ SELECT 'two' source_table, e.* FROM one e)
+ )
+ SELECT d.*
+ , COUNT(*) over (partition BY col1, col2
+ /* all relevant key columns */
+ ) amount
+ FROM diff d
+ ORDER BY 2,3
+ /* all relevant key columns */
+ , 1
+ /* the 'source_table column' */
+]]>
+</code>
+</snippet>
+<snippet name="Generate Cell Culture Xref" description="Generate 11 char number with a 0 in front for a cell culture xref.">
+<code>
+<![CDATA[
+SELECT '0' || TRUNC(dbms_random.value(10000000000, 99999999999)) AS Cell_Culture_Xref
+ FROM DUAL
+ CONNECT BY Level <= :desired_number_of_records;
+]]>
+</code>
+</snippet>
+<snippet name="Change Workflow Status" description="Changes the desired workflow to be in development status.">
+<code>
+<![CDATA[
+DECLARE 
+ workflow_id_in NUMBER := ;
+ BEGIN
+ UPDATE WORKFLOW
+ SET VERSION_STATUS = 'D'
+ WHERE WORKFLOW_ID = workflow_id_in;
+ 
+ COMMIT;
+ END;
+]]>
+</code>
+</snippet>
+</group>
+</snippets>

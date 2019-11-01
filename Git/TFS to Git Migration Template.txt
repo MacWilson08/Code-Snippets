@@ -1,0 +1,77 @@
+#Using CMD
+
+git-tf clone https://us02npntfsds001.web.nasdaq.com/tfs/GWS "$/DevApps/WebISS/Development/Resource Files" C:\repo\GIT\ExactApps\exact\retired\development\resource_files --deep
+
+cd C:\repo\GIT\ExactApps\exact\retired\development\resource_files
+
+git remote add ExactApps/exact/retired/development/resource_files C:\repo\GIT\ExactApps\exact\retired\development\resource_files
+
+#Did not return anything.
+
+git fetch ExactApps/exact/retired/development/resource_files --tags
+
+#Returned
+
+##From C:\repo\GIT\ExactApps\exact\retired\development\resource_files
+## * [new branch]      master     -> ExactApps/exact/retired/development/resource_files/master
+
+git merge --allow-unrelated-histories ExactApps/exact/retired/development/resource_files/master
+
+#Returned 
+
+##Already up to date.
+
+git commit -m "Moved WebISS/Development/Resource Files to GIT"
+
+#Returned
+
+##On branch master
+##nothing to commit, working tree clean
+
+git -c http.sslVerify=false push --set-upstream https://racwil@git.nasdaq.com/ExactApps/exact/retired/development/resource_files.git master
+
+#Returned
+
+##Enumerating objects: 13, done.
+##Counting objects: 100% (13/13), done.
+##Delta compression using up to 4 threads
+##Compressing objects: 100% (8/8), done.
+##Writing objects: 100% (13/13), 49.79 KiB | 2.37 MiB/s, done.
+##Total 13 (delta 0), reused 0 (delta 0)
+##remote:
+##remote: The private project ExactApps/retired/development/resource_files was successfully created.
+##remote:
+##remote: To configure the remote, run:
+##remote:   git remote add origin https://git.nasdaq.com/ExactApps/exact/retired/development/resource_files.git
+##remote:
+##remote: To view the project, visit:
+##remote:   https://git.nasdaq.com/ExactApps/exact/retired/development/resource_files
+##remote:
+##To https://git.nasdaq.com/ExactApps/exact/retired/development/resource_files.git
+## * [new branch]      master -> master
+##Branch 'master' set up to track remote branch 'master' from 'https://racwil@git.nasdaq.com/ExactApps/exact/retired/development/resource_files.git'.
+
+git tag
+
+#Returned
+
+##TFS_C38426
+##TFS_C38427
+##TFS_C38428
+
+git push --tags
+
+#Returned 
+
+##Enumerating objects: 3, done.
+##Counting objects: 100% (3/3), done.
+##Delta compression using up to 4 threads
+##Compressing objects: 100% (3/3), done.
+##Writing objects: 100% (3/3), 555 bytes | 79.00 KiB/s, done.
+##Total 3 (delta 0), reused 0 (delta 0)
+##To https://git.nasdaq.com/ExactApps/exact/retired/development/resource_files.git
+## * [new tag]         TFS_C38426 -> TFS_C38426
+## * [new tag]         TFS_C38427 -> TFS_C38427
+## * [new tag]         TFS_C38428 -> TFS_C38428
+
+##----------------- MIGRATION COMPLETED :  VERIFY REMOTE SERVER ------------##

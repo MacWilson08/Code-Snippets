@@ -1,0 +1,19 @@
+## The following snippets are for:
+##      1. Bulk moving items in a TFS repo from one location to another in the TFS Repo
+##      2. Getting a list of all users with pending changes in TFS and write to a file in a location
+
+## ------------------------------------------------- ## ------------------------------------------------- ##
+
+## Basic Structure is:
+## [location of TF.exe] move "[Current TFS File Repo Location]/[File Name partial with optional wild card character(*)]" "[File location to move files to in TFS Repo]"
+
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\TF.exe" move "$/DevApps/WebISS/Deployment/WebISS Datafixes/DF2018*" "$/DevApps/WebISS/Deployment/WebISS Datafixes/Archive/
+
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\TF.exe" move "$/DevApps/WebISS/QC/Prod 9.4*" "$/DevApps/WebISS/QC/Recent/
+
+## ------------------------------------------------- ## ------------------------------------------------- ##
+
+## Basic Structure is:
+## [location of TF.exe] status "[TFS Repo Location to be checked against]" /user:[username or wild card (*) to get all)] /recursive > [location to write the results to]\[name of file with file extension (like .txt)]
+
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\TF.exe"  status $/DevApps/WebISS /user:* /recursive > c:\Checkouts.txt
